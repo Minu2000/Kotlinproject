@@ -9,14 +9,10 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/todolists")
 class TodoListController(@Autowired val todoListService: TodoListService) {
 
-    @PostMapping
+    @PostMapping("/create")
     fun createTodoList(
-        @RequestParam userId: String,
-        @RequestHeader("accessToken") accessToken: String,
         @RequestBody todoList: TodoList
     ): TodoList {
-        return todoListService.createTodoList(userId, accessToken, todoList)
+        return todoListService.createTodoList(todoList)
     }
-
-    // Add other API endpoints and methods related to todo lists
 }

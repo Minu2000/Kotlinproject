@@ -35,15 +35,6 @@ class UserService(@Autowired val userRepository: UserRepository) {
     private fun generateAccessToken(user: User): String {
         return UUID.randomUUID().toString()
     }
-//        val secretKey = "minu_secret_key"
-//        val accessTokenExpiration = 86400000
 
-        //val accessToken =
-//            Jwts.builder()
-//                .setSubject(user.userId)
-//                .setIssuedAt(Date())
-//                .setExpiration(Date(System.currentTimeMillis() + accessTokenExpiration))
-//                .signWith(SignatureAlgorithm.HS256, secretKey)
-//                .compact()
 
 }

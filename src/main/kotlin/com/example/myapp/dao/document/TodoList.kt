@@ -9,5 +9,5 @@ data class TodoList(
     @Id val id: String = UUID.randomUUID().toString(),
     val title: String,
     val userId: String,
-    val items: List<String>,
+    val items: String,
 )
