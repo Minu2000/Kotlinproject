@@ -31,12 +31,35 @@ import org.springframework.stereotype.Service
 @Service
 class TodoListService(
     @Autowired val todoListRepository: TodoListRepository,
-    @Autowired val userRepository: UserRepository
+   //@Autowired val userRepository: UserRepository
 ) {
 
     fun createTodoList(todoList: TodoList): TodoList {
         return todoListRepository.save(todoList)
     }
+    fun updateTodoList(id: String, updatedTodoList: TodoList): TodoList {
+        val existingTodoList = todoListRepository.findById(id)
+            .orElseThrow { NoSuchElementException("Todo List not found with id: $id") }
+
+        val modifiedTodoList = existingTodoList.copy(
+            title = updatedTodoList.title,
+            items = updatedTodoList.items
+        )
+
+        return todoListRepository.save(modifiedTodoList)
+    }
+
+    fun deleteTodoList(id: String) {
+        val existingTodoList = todoListRepository.findById(id)
+            .orElseThrow { NoSuchElementException("Todo List not found with id: $id") }
+
+        todoListRepository.delete(existingTodoList)
+    }
+
 }
+
+
+
+
 
 

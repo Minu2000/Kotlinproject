@@ -15,4 +15,17 @@ class TodoListController(@Autowired val todoListService: TodoListService) {
     ): TodoList {
         return todoListService.createTodoList(todoList)
     }
+
+    @PutMapping("/update/{id}")
+    fun updateTodoList(
+        @PathVariable id: String,
+        @RequestBody updatedTodoList: TodoList
+    ): TodoList {
+        return todoListService.updateTodoList(id, updatedTodoList)
+    }
+
+    @DeleteMapping("/delete/{id}")
+    fun deleteTodoList(@PathVariable id: String) {
+        todoListService.deleteTodoList(id)
+    }
 }

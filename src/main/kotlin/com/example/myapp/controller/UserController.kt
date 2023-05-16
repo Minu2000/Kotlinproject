@@ -5,6 +5,8 @@ import com.example.myapp.dao.document.User
 import com.example.myapp.service.TodoListService
 import com.example.myapp.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -21,11 +23,17 @@ class UserController(@Autowired val userService: UserService) {
         return userService.getAllUsers()
     }
 
+//    @PostMapping("/login")
+//    fun login(@RequestBody loginRequest: LoginRequest): Map<String, String> {
+//        val accessToken = userService.login(loginRequest)
+//        return mapOf("accessToken" to accessToken, "message" to "Successfully logged in")
+//    }
+
     @PostMapping("/login")
-    fun login(@RequestBody loginRequest: LoginRequest): Map<String, String> {
+    fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<Map<String, String>> {
         val accessToken = userService.login(loginRequest)
-        return mapOf("accessToken" to accessToken, "message" to "Successfully logged in")
+        val response = mapOf("accessToken" to accessToken, "message" to "Successfully logged in")
+        return ResponseEntity(response, HttpStatus.OK)
     }
+}
 
-
-    }
