@@ -5,18 +5,15 @@ import com.example.myapp.dao.document.User
 import com.example.myapp.dao.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-//import org.springframework.beans.factory.annotation.Value
 import java.util.*
 import kotlin.NoSuchElementException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import java.security.Key
-import io.jsonwebtoken.security.Keys
+
 
 @Service
 class UserService(@Autowired val userRepository: UserRepository) {
-    @Value("\${jwt.secret}")
-    private lateinit var secretKey: String
+
 
     fun createUser(user: User): User {
         return userRepository.save(user)
@@ -37,8 +34,7 @@ class UserService(@Autowired val userRepository: UserRepository) {
         return generateAccessToken(user)
     }
     private fun generateAccessToken(user: User): String {
-        //val secretKey ="minumithra"
-        val secretKey: Key = Keys.secretKeyFor(SignatureAlgorithm.HS512)
+        val secretKey ="minumithra_narmadha_001"
         val expirationTimeMillis = 3600000
 
         val accessToken = Jwts.builder()
@@ -56,4 +52,3 @@ class UserService(@Autowired val userRepository: UserRepository) {
 
 
 }
-
